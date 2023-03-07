@@ -3,10 +3,10 @@ const app = express();
 const server = require('http').Server(app);
 const port = process.env.PORT || 80;
 
-var sql = require('mssql/msnodesqlv8');
-var config = {
-	connectionString: 'Driver=SQL Server;Server=localhost\\SQLEXPRESS;Database=places;Trusted_Connection=true;'
-};
+// var sql = require('mssql/msnodesqlv8');
+// var config = {
+// 	connectionString: 'Driver=SQL Server;Server=localhost\\SQLEXPRESS;Database=places;Trusted_Connection=true;'
+// };
 
 server.listen(port, (err) => {
 	if (err) {
@@ -19,18 +19,20 @@ server.listen(port, (err) => {
 // fetch all countries
 app.get('/countries', (req, res) => {
 	try {
-		sql.connect(config, err => {
-			if (err) {
-				console.log("connection failed sql error: " + err);
-			}
-			new sql.Request().query('Select * from countries', (err, result) => {
-				if (err) {
-					console.log("connection ok but sql error: " + err);
-				} else {
-					res.json(result.recordset);
-				};
-			})
-		});
+		// sql.connect(config, err => {
+		// 	if (err) {
+		// 		console.log("connection failed sql error: " + err);
+		// 	}
+		// 	new sql.Request().query('Select * from countries', (err, result) => {
+		// 		if (err) {
+		// 			console.log("connection ok but sql error: " + err);
+		// 		} else {
+		// 			res.json(result.recordset);
+		// 		};
+		// 	})
+		// });
+		var output = {"name": "India", "Code": "IN"};
+		res.json(output);
 	} catch (err) {
 		console.log(err);
 	}
